@@ -1,0 +1,5 @@
+if [[ $2 == portnumber && $1 == 'reponame' ]]; then
+  su -c "ansible-playbook /home/ubuntu/gitpull/odoocore.yml -e 'hostname=equipemeraldup username=odooUsername servicename=odooUsername-server'" ubuntu
+  exit 0
+fi
+

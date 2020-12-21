@@ -1,0 +1,21 @@
+---
+- hosts: '{{ hostname }}'
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+  tasks:
+   - name: git pull
+     shell: |
+         git -C /home/{{ username }}/odoo/custom/modifier stash
+         git -C /home/{{ username }}/odoo/custom/modifier pull
+     become_user: '{{ username }}'
+   - service:
+         name: '{{ servicename }}'
+         state: stopped
+   - service:
+         name: '{{ servicename }}'
+         state: started
+   - service:
+         name: apache2
+         state: restarted
+

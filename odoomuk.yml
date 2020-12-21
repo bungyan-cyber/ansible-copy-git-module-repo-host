@@ -1,0 +1,20 @@
+---
+- hosts: '{{ hostname }}'
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+  tasks:
+   - name: git pull
+     shell: |
+         git -C /opt/odoo/odoo/custom/modiifer stash
+         git -C /opt/odoo/odoo/custom/modifer pull
+     become_user: odoo
+   - service:
+         name: odoo-server
+         state: stopped
+   - service:
+         name: odoo-server
+         state: started
+   - service:
+         name: apache2
+         state: restarted

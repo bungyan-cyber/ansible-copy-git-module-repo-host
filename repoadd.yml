@@ -1,0 +1,9 @@
+---
+- hosts: '{{ hostname }}'
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+  tasks:
+
+     - name: Execute the script
+       command: bash /home/ubuntu/createuser.sh {{ username }} {{ portnumber }}
