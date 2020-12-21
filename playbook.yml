@@ -1,6 +1,6 @@
 # Starting playbook for "Playbooks" exercise.
 ---
-- hosts : '{{hostname}}
+- hosts : '{{hostname}}'
   tasks :
     - name : Create /lab/directory
     - become : yes
