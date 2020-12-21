@@ -1,0 +1,24 @@
+---
+
+- hosts: '{{ hostname }}'
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+  become_user: root
+  tasks:
+     - copy:
+          src: /home/ubuntu/gitrepos/{{ reponame }}/{{ item }}
+          dest: /opt/odoo/odoo/custom/modifier/
+          owner: odoo
+          group: odoo
+          mode: 0755
+       with_lines: cat /home/ubuntu/{{ filename }}
+     - service:
+          name: odoo-server
+          state: stopped
+     - service:
+          name: odoo-server
+          state: started
+     - service:
+          name: apache2
+          state: restarted

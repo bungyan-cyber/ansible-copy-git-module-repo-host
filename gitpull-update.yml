@@ -1,0 +1,19 @@
+---
+- hosts: '{{ hostname }}'
+  user: '{{ ftpuser }}'
+  become: yes
+  tasks:
+   - name: git pull
+     shell: |
+         git -C /opt/odoo/odoo/addons stash
+         git -C /opt/odoo/odoo/addons pull
+     become_user: odoo
+   - service:
+         name: odoo-server
+         state: stopped
+   - service:
+         name: odoo-server
+         state: started
+   - service:
+         name: apache2
+         state: restarted
