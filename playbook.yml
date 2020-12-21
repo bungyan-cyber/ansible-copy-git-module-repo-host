@@ -1,0 +1,15 @@
+# Starting playbook for "Playbooks" exercise.
+---
+- hosts : '{{hostname}}
+  tasks :
+    - name : Create /lab/directory
+    - become : yes
+    - file : 
+        path : /lab/ {{ reponame }}
+        state : directory 
+        mode : 0777
+    - name : copy file
+      copy :
+      scr  : /home/ansible/fundementals/tech
+      dest : /lab
+      mode : '0775'          
