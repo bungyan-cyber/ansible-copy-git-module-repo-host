@@ -12,4 +12,4 @@
       copy :
       scr  : /home/ansible/fundementals/tech
       dest : /lab
-      mode : '0775'          
+      mode : 0775         
